@@ -1,6 +1,8 @@
 # 🩺 Predicción de Costos de Seguro Médico
 
 Este proyecto tiene como objetivo **predecir los costos del seguro médico** de pacientes utilizando técnicas de regresión y presentar los resultados a través de una **interfaz web interactiva**.
+![Distribución de costos de seguro médico](https://github.com/amymarlene/Modelado-de-datos-Regresion-Para-Seguro-Medico/blob/main/proyecto4.png?raw=true)
+
 
 ---
 
