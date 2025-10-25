@@ -50,48 +50,5 @@ Se entrenaron los siguientes modelos de regresión:
 
 Se desarrolló una **interfaz con Gradio**, que permite al usuario ingresar datos de un paciente y obtener la predicción de costo de seguro médico en tiempo real.  
 
-**Ejemplo de uso en Colab:**
-
-```python
-import gradio as gr
-import joblib
-import pandas as pd
-
-best_model = joblib.load("best_model.pkl")
-
-def predecir_costos(edad, bmi, hijos, fumador, sexo, region):
-    cols = ["age","bmi","children","sex_male","smoker_yes",
-            "region_northwest","region_southeast","region_southwest","region_northeast"]
-    input_dict = {col: [0] for col in cols}
-    input_dict["age"] = [edad]
-    input_dict["bmi"] = [bmi]
-    input_dict["children"] = [hijos]
-    input_dict["sex_male"] = [1 if sexo=="Masculino" else 0]
-    input_dict["smoker_yes"] = [1 if fumador=="Sí" else 0]
-    region_map = {
-        "Noreste": "region_northeast",
-        "Noroeste": "region_northwest",
-        "Sureste": "region_southeast",
-        "Suroeste": "region_southwest"
-    }
-    input_dict[region_map[region]] = [1]
-    input_data = pd.DataFrame(input_dict)
-    pred = best_model.predict(input_data)[0]
-    return f"💰 Costo estimado del seguro médico: ${pred:,.2f}"
-
-demo = gr.Interface(
-    fn=predecir_costos,
-    inputs=[
-        gr.Number(label="Edad"),
-        gr.Number(label="Índice de masa corporal (BMI)"),
-        gr.Number(label="Número de hijos"),
-        gr.Radio(["Sí", "No"], label="¿Fuma?"),
-        gr.Radio(["Masculino", "Femenino"], label="Sexo"),
-        gr.Radio(["Noreste", "Noroeste", "Sureste", "Suroeste"], label="Región")
-    ],
-    outputs="text",
-    title="🩺 Predicción de Costos de Seguro Médico",
-    description="Introduce los datos del paciente para estimar el costo según el modelo de regresión."
-)
-
-demo.launch(share=True, inline=True)
+Link permanente del modelo en Hugging Face Space:
+https://huggingface.co/spaces/Amymarlene/SeguroMedico
